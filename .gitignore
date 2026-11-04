@@ -1,0 +1,35 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log*
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+
+# Local secrets and environment configuration
+.env
+.env.*
+!.env.example
+
+# Private source material and submission bundles
+/documents/
+/updater/input/
+/updater/output/
+/updater/VERIFY_LOG.txt
+/story.txt
+/제출문_초안.txt
+/BR_A_*.zip
+/site/assets/*.docx
+
+# Application documents are excluded from GitHub Pages. The deployment
+# preparation script also removes their links from the published HTML.
+# .gitignore does not remove files already tracked in Git history.
+
+# GitHub Pages staging output
+/_site/
