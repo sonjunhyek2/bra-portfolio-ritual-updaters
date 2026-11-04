@@ -1,14 +1,25 @@
 from pathlib import Path
-from docx import Document
-from docx.shared import Inches, Pt, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.oxml.ns import qn
 from shutil import copyfile
+
+try:
+    from docx import Document
+    from docx.shared import Inches, Pt, RGBColor
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.oxml.ns import qn
+except ModuleNotFoundError as exc:
+    if exc.name == 'docx':
+        raise SystemExit('필요한 패키지가 없습니다. 먼저 `python -m pip install python-docx`를 실행하세요.') from exc
+    raise
 
 BASE=Path(__file__).resolve().parent
 DOCS=BASE/'documents'
 SITE=BASE/'site'/'assets'
-STORY=(BASE/'story.txt').read_text(encoding='utf-8').strip().split('\n\n')
+STORY_PATH=BASE/'story.txt'
+if not STORY_PATH.is_file():
+    raise SystemExit(f'자기소개서 원문 파일을 찾을 수 없습니다: {STORY_PATH}')
+STORY=STORY_PATH.read_text(encoding='utf-8').strip().split('\n\n')
+DOCS.mkdir(parents=True, exist_ok=True)
+SITE.mkdir(parents=True, exist_ok=True)
 EMAIL='jungurdudgh@gmail.com'
 
 C_NAVY=RGBColor(19,34,55); C_MUTED=RGBColor(99,112,133); C_ACCENT=RGBColor(101,104,211)

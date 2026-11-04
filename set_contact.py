@@ -2,7 +2,13 @@
 import re, sys
 from pathlib import Path
 from shutil import copyfile
-from docx import Document
+
+try:
+    from docx import Document
+except ModuleNotFoundError as exc:
+    if exc.name == 'docx':
+        raise SystemExit('필요한 패키지가 없습니다. 먼저 `python -m pip install python-docx`를 실행하세요.') from exc
+    raise
 
 if len(sys.argv)!=2 or not re.fullmatch(r'[A-Za-z0-9.!#$%&\'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+',sys.argv[1]):
     print('사용법: python set_contact.py 공개용이메일@example.com')
