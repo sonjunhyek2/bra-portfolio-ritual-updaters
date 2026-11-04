@@ -29,6 +29,8 @@ jobs:
           python-version: "3.x"
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Prepare privacy-filtered site
         run: python scripts/prepare_pages.py
       - name: Upload site artifact
